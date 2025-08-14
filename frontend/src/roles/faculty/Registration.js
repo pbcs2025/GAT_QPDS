@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./Main.css";
+import "../../common/Main.css";
 import { Link, useNavigate } from "react-router-dom";
 
 const initialValues = {

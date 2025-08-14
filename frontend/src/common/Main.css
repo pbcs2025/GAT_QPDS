@@ -3,7 +3,7 @@
 }
 
 body {
-    background: url(../public/images/GAT.jpg);
+    background: url(/public/images/GAT.jpg);
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;

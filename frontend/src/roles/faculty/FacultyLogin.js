@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import validateLogin from "./validateLogin";
-import "./Main.css";
+import validateLogin from "../../common/validateLogin";
+import "../../common/Main.css";
 
 function FacultyLogin() {
   const navigate = useNavigate();

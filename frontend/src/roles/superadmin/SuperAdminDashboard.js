@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./dashboard.css";
+import "../../common/dashboard.css";
 import ManageUsers from "./ManageUsers";
 import ViewAssignees from "./ViewAssignees";
 import AssigneeDetails from "./AssigneeDetails";

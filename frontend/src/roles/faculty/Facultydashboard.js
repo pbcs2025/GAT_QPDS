@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./dashboard.css";
+import "../../common/dashboard.css";
 
 function FacultyDashboard() {
   const navigate = useNavigate();

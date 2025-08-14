@@ -1,6 +1,6 @@
 //ManageUsers.js
 import React, { useEffect, useState, useRef } from "react";
-import "./dashboard.css";
+import "../../common/dashboard.css";
 import "./manageUsersMessage.css";
 
 function ManageUsers({ userType }) {

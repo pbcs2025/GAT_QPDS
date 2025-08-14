@@ -2,19 +2,19 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import RoleSelection from "./RoleSelection";
-import SuperAdminLogin from "./SuperAdminLogin";
-import AdminLogin from "./AdminLogin";
-import FacultyLogin from "./FacultyLogin";
-import Registration from "./Registration";
-import PaperSetterLogin from "./PaperSetterLogin";
-import SuperAdminDashboard from "./SuperAdminDashboard";
-import AdminDashboard from "./AdminDashboard";
-import FacultyDashboard from "./Facultydashboard";
-import PaperSetterDashboard from "./Papersetterdashboard";
-import ManageUsers from "./ManageUsers";
-import AdminManageFaculty from "./AdminManageFaculty";
-import AdminManageFacultyPage from "./AdminManageFacultyPage";
-import AssigneeDetails from "./AssigneeDetails";
+import SuperAdminLogin from "../roles/superadmin/SuperAdminLogin";
+import AdminLogin from "../roles/admin/AdminLogin";
+import FacultyLogin from "../roles/faculty/FacultyLogin";
+import Registration from "../roles/faculty/Registration";
+import PaperSetterLogin from "../roles/papersetter/PaperSetterLogin";
+import SuperAdminDashboard from "../roles/superadmin/SuperAdminDashboard";
+import AdminDashboard from "../roles/admin/AdminDashboard";
+import FacultyDashboard from "../roles/faculty/Facultydashboard";
+import PaperSetterDashboard from "../roles/papersetter/Papersetterdashboard";
+import ManageUsers from "../roles/superadmin/ManageUsers";
+import AdminManageFaculty from "../roles/admin/AdminManageFaculty";
+import AdminManageFacultyPage from "../roles/admin/AdminManageFacultyPage";
+import AssigneeDetails from "../roles/superadmin/AssigneeDetails";
 
 function App() {
   return (

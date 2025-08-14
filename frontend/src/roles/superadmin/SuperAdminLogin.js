@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {useNavigate } from "react-router-dom";
-import validateLogin from "./validateLogin";
-import "./Main.css";
+import validateLogin from "../../common/validateLogin";
+import "../../common/Main.css";
 
 function FacultyLogin() {
   const navigate = useNavigate();
@@ -22,8 +22,8 @@ function FacultyLogin() {
 
     if (Object.keys(errors).length === 0) {
       const { username, password } = formValues;
-      if (username === "setter" && password === "setter123") {
-        navigate("/paper-setter-dashboard");
+      if (username === "superadmin" && password === "12345") {
+        navigate("/super-admin-dashboard");
       } else {
         setLoginMessage("❌ Invalid credentials.");
       }
@@ -33,7 +33,7 @@ function FacultyLogin() {
   return (
     <div className="container">
       <form onSubmit={handleSubmit}>
-        <h1>Paper Setter Login</h1>
+        <h1>Super Admin Login</h1>
         <div className="ui form">
           <div className="field">
             <label>Username</label>

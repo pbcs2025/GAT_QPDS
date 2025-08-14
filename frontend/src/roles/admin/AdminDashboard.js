@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./dashboard.css";
+import "../../common/dashboard.css";
 import AdminManageFaculty from "./AdminManageFaculty"; // Import at the top
 import AdminManageFacultyPage from "./AdminManageFacultyPage";
 

@@ -1,8 +1,8 @@
 // AdminManageFacultyPage.js
 import React, { useState } from "react";
 import AdminManageFaculty from "./AdminManageFaculty";
-import ManageUsers from "./ManageUsers";
-import "./dashboard.css";
+import ManageUsers from "../superadmin/ManageUsers";
+import "../../common/dashboard.css";
 
 function AdminManageFacultyPage() {
   const [showForm, setShowForm] = useState(false);
