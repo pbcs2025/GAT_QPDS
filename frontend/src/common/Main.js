@@ -15,6 +15,9 @@ import ManageUsers from "../roles/superadmin/ManageUsers";
 import AdminManageFaculty from "../roles/admin/AdminManageFaculty";
 import AdminManageFacultyPage from "../roles/admin/AdminManageFacultyPage";
 import AssigneeDetails from "../roles/superadmin/AssigneeDetails";
+import QuestionPaperBuilder from "./questionPaperBuilder";
+
+
 
 function App() {
   return (
@@ -34,6 +37,8 @@ function App() {
         <Route path="/admin/manage-faculty" element={<AdminManageFaculty />} />
         <Route path="/admin/manage-faculty-page" element={<AdminManageFacultyPage />} />
         <Route path="/assignees/:subjectCode" element={<AssigneeDetails />} />
+        <Route path="/question-paper-builder" element={<QuestionPaperBuilder />} />
+          
       </Routes>
     </Router>
   );
