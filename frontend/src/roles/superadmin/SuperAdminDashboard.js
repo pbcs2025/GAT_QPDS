@@ -5,6 +5,7 @@ import ManageUsers from "./ManageUsers";
 import ViewAssignees from "./ViewAssignees";
 import AssigneeDetails from "./AssigneeDetails";
 import SubjectsPage from "./SubjectsPage";
+import DepartmentsPage from "./DepartmentsPage";
 
 function SuperAdminDashboard() {
   const navigate = useNavigate();
@@ -39,7 +40,7 @@ function SuperAdminDashboard() {
           className={activeTab === "manageUsers" ? "active-tab" : ""}
           onClick={(e) => { e.preventDefault(); setActiveTab("manageUsers"); }}
         >
-          Selct QP Setters
+          Select QP Setters
         </a>
         <a
           href="#"
@@ -56,6 +57,15 @@ function SuperAdminDashboard() {
 >
   Subjects
 </a>
+
+<a
+  href="#"
+  className={activeTab === "departments" ? "active-tab" : ""}
+  onClick={(e) => { e.preventDefault(); setActiveTab("departments"); }}
+>
+  Departments
+</a>
+
 
 
         <a
@@ -132,6 +142,9 @@ function SuperAdminDashboard() {
         {activeTab === "viewAssignees" && <ViewAssignees />}
 
         {activeTab === "subjects" && <SubjectsPage />}
+
+        {activeTab === "departments" && <DepartmentsPage />}
+
 
 
         {activeTab === "settings" && (

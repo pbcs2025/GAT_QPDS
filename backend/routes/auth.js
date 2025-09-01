@@ -342,6 +342,88 @@ router.delete("/subjects/:id", async (req, res) => {
   }
 });
 
+// Get all subject codes in select QP setters section
+router.get("/subject-codes", (req, res) => {
+  const sql = "SELECT subject_code FROM subjects";
+  db.query(sql, (err, results) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: "Database error" });
+    }
+    res.json(results.map(row => row.subject_code));
+  });
+});
+
+// ================= Departments Management =================
+
+// Get all departments
+router.get("/departments", async (req, res) => {
+  try {
+    const [rows] = await db.promise().query("SELECT * FROM departments ORDER BY department");
+    res.json(rows);
+  } catch (err) {
+    console.error("Error fetching departments:", err);
+    res.status(500).json({ error: "Failed to fetch departments" });
+  }
+});
+
+
+// Add a new department
+router.post("/departments", async (req, res) => {
+  const { department } = req.body;
+  if (!department) {
+    return res.status(400).json({ error: "Department name is required" });
+  }
+
+  try {
+    await db.promise().query(
+      "INSERT INTO departments (department) VALUES (?)",
+      [department]
+    );
+    res.status(201).json({ message: "Department added successfully" });
+  } catch (err) {
+    console.error("Error adding department:", err);
+    res.status(500).json({ error: "Failed to add department" });
+  }
+});
+
+// Update department
+router.put("/departments/:department", async (req, res) => {
+  const { department } = req.params; // old department name (primary key)
+  const { newDepartment } = req.body; // new name
+
+  if (!newDepartment) {
+    return res.status(400).json({ error: "New department name is required" });
+  }
+
+  try {
+    await db.promise().query(
+      "UPDATE departments SET department=? WHERE department=?",
+      [newDepartment, department]
+    );
+    res.json({ message: "Department updated successfully" });
+  } catch (err) {
+    console.error("Error updating department:", err);
+    res.status(500).json({ error: "Failed to update department" });
+  }
+});
+
+// Delete department
+router.delete("/departments/:department", async (req, res) => {
+  const { department } = req.params;
+
+  try {
+    await db.promise().query("DELETE FROM departments WHERE department=?", [department]);
+    res.json({ message: "Department deleted successfully" });
+  } catch (err) {
+    console.error("Error deleting department:", err);
+    res.status(500).json({ error: "Failed to delete department" });
+  }
+});
+
+module.exports = router;
+
+
 
 
 module.exports = router;

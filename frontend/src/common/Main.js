@@ -16,6 +16,8 @@ import AdminManageFaculty from "../roles/admin/AdminManageFaculty";
 import AdminManageFacultyPage from "../roles/admin/AdminManageFacultyPage";
 import AssigneeDetails from "../roles/superadmin/AssigneeDetails";
 import SubjectsPage from "../roles/superadmin/SubjectsPage"
+import DepartmentsPage from "../roles/superadmin/DepartmentsPage";
+
 
 function App() {
   return (
@@ -36,6 +38,8 @@ function App() {
         <Route path="/admin/manage-faculty-page" element={<AdminManageFacultyPage />} />
         <Route path="/assignees/:subjectCode" element={<AssigneeDetails />} />
         <Route path="/subjects" element={<SubjectsPage />} />
+        <Route path="/departments" element={<DepartmentsPage />} />
+
       </Routes>
     </Router>
   );
