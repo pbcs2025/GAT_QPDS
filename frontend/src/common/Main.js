@@ -17,6 +17,9 @@ import AdminManageFacultyPage from "../roles/admin/AdminManageFacultyPage";
 import AssigneeDetails from "../roles/superadmin/AssigneeDetails";
 import SubjectsPage from "../roles/superadmin/SubjectsPage"
 import DepartmentsPage from "../roles/superadmin/DepartmentsPage";
+import QuestionPaperBuilder from './questionPaperBuilder';
+
+
 
 
 function App() {
@@ -39,6 +42,7 @@ function App() {
         <Route path="/assignees/:subjectCode" element={<AssigneeDetails />} />
         <Route path="/subjects" element={<SubjectsPage />} />
         <Route path="/departments" element={<DepartmentsPage />} />
+         <Route path="/question-paper-builder" element={<QuestionPaperBuilder />} />
 
       </Routes>
     </Router>
