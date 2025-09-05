@@ -6,6 +6,8 @@ import ViewAssignees from "./ViewAssignees";
 import AssigneeDetails from "./AssigneeDetails";
 import SubjectsPage from "./SubjectsPage";
 import DepartmentsPage from "./DepartmentsPage";
+import AdminManageFacultyPage from "./AdminManageFacultyPage";
+
 
 function SuperAdminDashboard() {
   const navigate = useNavigate();
@@ -35,6 +37,20 @@ function SuperAdminDashboard() {
         >
           Dashboard
         </a>
+
+        <a
+  href="#"
+  className={activeTab === "manageFaculty" ? "active-tab" : ""}
+  onClick={(e) => {
+    e.preventDefault();
+    setActiveTab("manageFaculty");
+  }}
+>
+  Manage Faculty
+</a>
+
+
+        
         <a
           href="#"
           className={activeTab === "manageUsers" ? "active-tab" : ""}
@@ -138,6 +154,9 @@ function SuperAdminDashboard() {
         )}
 
         {activeTab === "manageUsers" && <ManageUsers userType="superadmin" />}
+
+        {activeTab === "manageFaculty" && <AdminManageFacultyPage />}
+
 
         {activeTab === "viewAssignees" && <ViewAssignees />}
 

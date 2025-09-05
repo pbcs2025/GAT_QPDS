@@ -12,8 +12,8 @@ import AdminDashboard from "../roles/admin/AdminDashboard";
 import FacultyDashboard from "../roles/faculty/Facultydashboard";
 import PaperSetterDashboard from "../roles/papersetter/Papersetterdashboard";
 import ManageUsers from "../roles/superadmin/ManageUsers";
-import AdminManageFaculty from "../roles/admin/AdminManageFaculty";
-import AdminManageFacultyPage from "../roles/admin/AdminManageFacultyPage";
+import AdminManageFaculty from "../roles/superadmin/AdminManageFaculty";
+import AdminManageFacultyPage from "../roles/superadmin/AdminManageFacultyPage";
 import AssigneeDetails from "../roles/superadmin/AssigneeDetails";
 import SubjectsPage from "../roles/superadmin/SubjectsPage"
 import DepartmentsPage from "../roles/superadmin/DepartmentsPage";

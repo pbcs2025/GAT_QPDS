@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../../common/dashboard.css";
+
 const API_BASE = process.env.REACT_APP_API_BASE_URL;
 
 function DepartmentsPage() {
   const [departments, setDepartments] = useState([]);
   const [newDept, setNewDept] = useState("");
-  const [editDept, setEditDept] = useState(null);
+  const [editDeptId, setEditDeptId] = useState(null); // use ID instead of name
   const [updatedDept, setUpdatedDept] = useState("");
 
   useEffect(() => {
     fetchDepartments();
   }, []);
 
+  // Fetch all departments
   const fetchDepartments = async () => {
     try {
       const res = await axios.get(`${API_BASE}/departments`);
@@ -22,6 +24,7 @@ function DepartmentsPage() {
     }
   };
 
+  // Add department
   const addDepartment = async () => {
     if (!newDept) return;
     try {
@@ -33,11 +36,12 @@ function DepartmentsPage() {
     }
   };
 
-  const updateDepartment = async (oldDept) => {
+  // Update department
+  const updateDepartment = async (id) => {
     if (!updatedDept) return;
     try {
-      await axios.put(`${API_BASE}/departments/${oldDept}`, { newDepartment: updatedDept });
-      setEditDept(null);
+      await axios.put(`${API_BASE}/departments/${id}`, { newDepartment: updatedDept });
+      setEditDeptId(null);
       setUpdatedDept("");
       fetchDepartments();
     } catch (err) {
@@ -45,9 +49,10 @@ function DepartmentsPage() {
     }
   };
 
-  const deleteDepartment = async (dept) => {
+  // Delete department
+  const deleteDepartment = async (id) => {
     try {
-      await axios.delete(`${API_BASE}/departments/${dept}`);
+      await axios.delete(`${API_BASE}/departments/${id}`);
       fetchDepartments();
     } catch (err) {
       console.error("Error deleting department:", err);
@@ -77,10 +82,10 @@ function DepartmentsPage() {
           </tr>
         </thead>
         <tbody>
-          {departments.map((dept, idx) => (
-            <tr key={idx}>
+          {departments.map((dept) => (
+            <tr key={dept.id}>
               <td>
-                {editDept === dept.department ? (
+                {editDeptId === dept.id ? (
                   <input
                     type="text"
                     value={updatedDept}
@@ -92,15 +97,27 @@ function DepartmentsPage() {
               </td>
               <td>{new Date(dept.created_at).toLocaleString()}</td>
               <td>
-                {editDept === dept.department ? (
+                {editDeptId === dept.id ? (
                   <>
-                    <button onClick={() => updateDepartment(dept.department)}>Save</button>
-                    <button onClick={() => setEditDept(null)}>Cancel</button>
+                    <button onClick={() => updateDepartment(dept.id)}>Save</button>
+                    <button onClick={() => setEditDeptId(null)}>Cancel</button>
                   </>
                 ) : (
                   <>
-                    <button onClick={() => { setEditDept(dept.department); setUpdatedDept(dept.department); }}>Edit</button>
-                    <button onClick={() => deleteDepartment(dept.department)} style={{ color: "red" }}>Delete</button>
+                    <button
+                      onClick={() => {
+                        setEditDeptId(dept.id);
+                        setUpdatedDept(dept.department);
+                      }}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => deleteDepartment(dept.id)}
+                      style={{ color: "red" }}
+                    >
+                      Delete
+                    </button>
                   </>
                 )}
               </td>

@@ -1,7 +1,7 @@
 // AdminManageFacultyPage.js
 import React, { useState } from "react";
 import AdminManageFaculty from "./AdminManageFaculty";
-import ManageUsers from "../superadmin/ManageUsers";
+import ManageUsers from "./ManageUsers";
 import "../../common/dashboard.css";
 
 function AdminManageFacultyPage() {
@@ -27,7 +27,7 @@ function AdminManageFacultyPage() {
 
       <div className="faculty-section">
         <h2>Registered Faculty List</h2>
-        <ManageUsers userType="admin"/>
+        <ManageUsers userType="superadmin"/>
       </div>
     </div>
   );

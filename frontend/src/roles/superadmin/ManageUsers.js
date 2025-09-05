@@ -10,6 +10,8 @@ function ManageUsers({ userType }) {
   const [internalFaculties, setInternalFaculties] = useState([]);
   const [otherFaculties, setOtherFaculties] = useState([]);
   const [selectedEmails, setSelectedEmails] = useState([]);
+  const [departments, setDepartments] = useState([]);
+  const [subjectCodes, setSubjectCodes] = useState([]);
   const [subjectCode, setSubjectCode] = useState("");
   const [submitDate, setSubmitDate] = useState("");
   const [lastSubmittedSubjectCode, setLastSubmittedSubjectCode] = useState("");
@@ -20,41 +22,74 @@ function ManageUsers({ userType }) {
 
   
 
-  const subjectCodes = [
-    "CS101 - Data Structures",
-    "CS102 - Algorithms",
-    "EC201 - Digital Electronics",
-    "ME301 - Thermodynamics",
-    "CE401 - Structural Engineering",
-    "CSE23401 - Engineering Mathematics"
-  ];
+  // const subjectCodes = [
+  //   "CS101 - Data Structures",
+  //   "CS102 - Algorithms",
+  //   "EC201 - Digital Electronics",
+  //   "ME301 - Thermodynamics",
+  //   "CE401 - Structural Engineering",
+  //   "CSE23401 - Engineering Mathematics"
+  // ];
+  useEffect(() => {
+  axios
+    .get(`${API_BASE}/subject-codes`)
+    .then((res) => {
+      setSubjectCodes(res.data); // res.data should be an array of codes
+    })
+    .catch((err) => console.error("Error fetching subject codes:", err));
+}, []);
 
-  const deptMap = {
-    "computer science": "Computer Science and Engineering (CSE)",
-    cse: "Computer Science and Engineering (CSE)",
-    "information science": "Information Science and Engineering (ISE)",
-    ise: "Information Science and Engineering (ISE)",
-    "electronics and communication": "Electronics and Communication Engineering (ECE)",
-    ece: "Electronics and Communication Engineering (ECE)",
-    "electrical and electronics": "Electrical and Electronics Engineering (EEE)",
-    eee: "Electrical and Electronics Engineering (EEE)",
-    mechanical: "Mechanical Engineering (ME)",
-    me: "Mechanical Engineering (ME)",
-    civil: "Civil Engineering (CE)",
-    ce: "Civil Engineering (CE)",
-    "artificial intelligence": "Artificial Intelligence and Machine Learning (AIML)",
-    aiml: "Artificial Intelligence and Machine Learning (AIML)",
-    "electronics and instrumentation": "Electronics and Instrumentation Engineering (EIE)",
-    eie: "Electronics and Instrumentation Engineering (EIE)",
-    aerospace: "Aerospace Engineering (AE)",
-    ae: "Aerospace Engineering (AE)",
-  };
+useEffect(() => {
+  axios
+    .get(`${API_BASE}/departments`)
+    .then((res) => {
+      if (Array.isArray(res.data)) {
+        // If API returns objects like {department: "CSE"}, map to strings
+        const deptNames = res.data.map(d => typeof d === "string" ? d : d.department);
+        setDepartments(deptNames);
+      } else {
+        console.error("Unexpected departments response:", res.data);
+        setDepartments([]);
+      }
+    })
+    .catch((err) => {
+      console.error("Error fetching departments:", err);
+      setDepartments([]);
+    });
+}, []);
+
+
+
+
+  // const deptMap = {
+  //   "computer science": "Computer Science and Engineering (CSE)",
+  //   cse: "Computer Science and Engineering (CSE)",
+  //   "information science": "Information Science and Engineering (ISE)",
+  //   ise: "Information Science and Engineering (ISE)",
+  //   "electronics and communication": "Electronics and Communication Engineering (ECE)",
+  //   ece: "Electronics and Communication Engineering (ECE)",
+  //   "electrical and electronics": "Electrical and Electronics Engineering (EEE)",
+  //   eee: "Electrical and Electronics Engineering (EEE)",
+  //   mechanical: "Mechanical Engineering (ME)",
+  //   me: "Mechanical Engineering (ME)",
+  //   civil: "Civil Engineering (CE)",
+  //   ce: "Civil Engineering (CE)",
+  //   "artificial intelligence": "Artificial Intelligence and Machine Learning (AIML)",
+  //   aiml: "Artificial Intelligence and Machine Learning (AIML)",
+  //   "electronics and instrumentation": "Electronics and Instrumentation Engineering (EIE)",
+  //   eie: "Electronics and Instrumentation Engineering (EIE)",
+  //   aerospace: "Aerospace Engineering (AE)",
+  //   ae: "Aerospace Engineering (AE)",
+  // };
 
   const normalizeDeptName = (deptName) => {
-    if (!deptName) return "No Department";
-    const key = deptName.toLowerCase().trim();
-    return deptMap[key] || deptName;
-  };
+  if (!deptName) return "No Department";
+
+  const found = departments.find(d => d.toLowerCase() === deptName.toLowerCase());
+  return found || deptName;
+};
+
+
 
   useEffect(() => {
     fetch(`${API_BASE}/users`)

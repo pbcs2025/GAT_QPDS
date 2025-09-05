@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../common/dashboard.css";
-import AdminManageFaculty from "./AdminManageFaculty"; // Import at the top
-import AdminManageFacultyPage from "./AdminManageFacultyPage";
+//import AdminManageFaculty from "./AdminManageFaculty"; // Import at the top
+//import AdminManageFacultyPage from "./AdminManageFacultyPage";
 
 function AdminDashboard() {
   const navigate = useNavigate();
@@ -98,9 +98,9 @@ function AdminDashboard() {
         )}
 
 
-        {activeTab === "faculties" && (
+        {/* {activeTab === "faculties" && (
   <AdminManageFacultyPage />
-)}
+)} */}
 
         
         {activeTab === "reports" && (

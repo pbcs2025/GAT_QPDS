@@ -367,13 +367,10 @@ router.get("/departments", async (req, res) => {
   }
 });
 
-
 // Add a new department
 router.post("/departments", async (req, res) => {
   const { department } = req.body;
-  if (!department) {
-    return res.status(400).json({ error: "Department name is required" });
-  }
+  if (!department) return res.status(400).json({ error: "Department name is required" });
 
   try {
     await db.promise().query(
@@ -387,19 +384,16 @@ router.post("/departments", async (req, res) => {
   }
 });
 
-// Update department
-router.put("/departments/:department", async (req, res) => {
-  const { department } = req.params; // old department name (primary key)
-  const { newDepartment } = req.body; // new name
-
-  if (!newDepartment) {
-    return res.status(400).json({ error: "New department name is required" });
-  }
+// Update department by ID
+router.put("/departments/:id", async (req, res) => {
+  const { id } = req.params;
+  const { newDepartment } = req.body;
+  if (!newDepartment) return res.status(400).json({ error: "New department name is required" });
 
   try {
     await db.promise().query(
-      "UPDATE departments SET department=? WHERE department=?",
-      [newDepartment, department]
+      "UPDATE departments SET department=? WHERE id=?",
+      [newDepartment, id]
     );
     res.json({ message: "Department updated successfully" });
   } catch (err) {
@@ -408,22 +402,18 @@ router.put("/departments/:department", async (req, res) => {
   }
 });
 
-// Delete department
-router.delete("/departments/:department", async (req, res) => {
-  const { department } = req.params;
+// Delete department by ID
+router.delete("/departments/:id", async (req, res) => {
+  const { id } = req.params;
 
   try {
-    await db.promise().query("DELETE FROM departments WHERE department=?", [department]);
+    await db.promise().query("DELETE FROM departments WHERE id=?", [id]);
     res.json({ message: "Department deleted successfully" });
   } catch (err) {
     console.error("Error deleting department:", err);
     res.status(500).json({ error: "Failed to delete department" });
   }
 });
-
-module.exports = router;
-
-
 
 
 module.exports = router;
