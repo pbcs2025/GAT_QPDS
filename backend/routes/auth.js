@@ -421,6 +421,67 @@ router.delete("/departments/:department", async (req, res) => {
   }
 });
 
+// ================= Verifier Login =================
+router.post("/verifier/login", async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    const [rows] = await db.promise().query(
+      "SELECT * FROM verifier_data WHERE userid = ? AND password = ?",
+      [username, password]
+    );
+
+    if (rows.length > 0) {
+      return res.status(200).json({
+        success: true,
+        message: "Verifier login successful",
+        user: {
+          id: rows[0].id,
+          userid: rows[0].userid,
+          department: rows[0].department,
+        },
+      });
+    } else {
+      return res.status(401).json({ success: false, message: "Invalid verifier credentials" });
+    }
+  } catch (err) {
+    console.error("Verifier login error:", err);
+    res.status(500).json({ success: false, message: "Internal server error" });
+  }
+});
+
+
+// ================= Semester -> Subjects (Filtered by Department) =================
+
+// Get unique semesters
+router.get("/semesters", async (req, res) => {
+  try {
+    const [rows] = await db.promise().query(
+      "SELECT DISTINCT semester FROM subjects ORDER BY semester"
+    );
+    res.json(rows.map(row => row.semester));
+  } catch (err) {
+    console.error("Error fetching semesters:", err);
+    res.status(500).json({ error: "Failed to fetch semesters" });
+  }
+});
+
+// Get subjects for a given semester and department
+router.get("/subjects/:semester/:department", async (req, res) => {
+  const { semester, department } = req.params;
+  try {
+    const [rows] = await db.promise().query(
+      "SELECT * FROM subjects WHERE semester = ? AND department = ? ORDER BY subject_code",
+      [semester, department]
+    );
+    res.json(rows);
+  } catch (err) {
+    console.error("Error fetching subjects by semester and department:", err);
+    res.status(500).json({ error: "Failed to fetch subjects" });
+  }
+});
+
+
 module.exports = router;
 
 
